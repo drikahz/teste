@@ -1,9 +1,10 @@
 {
   "workflowApiVersion": "1.1",
-  "metaData": {
-    "icon": "https://cdn-icons-png.flaticon.com/512/733/733585.png"
-  },
   "type": "REST",
+  "metaData": {
+    "icon": "https://cdn-icons-png.flaticon.com/512/733/733585.png",
+    "category": "message"
+  },
   "lang": {
     "pt-BR": {
       "name": "Teste Webhook",
@@ -12,8 +13,11 @@
   },
   "arguments": {
     "execute": {
-      "url": "hhttps://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
-      "verb": "POST"
+      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "verb": "POST",
+      "body": "",
+      "header": "",
+      "useJwt": false
     }
   }
 }
