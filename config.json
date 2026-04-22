@@ -7,8 +7,8 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Teste Webhook",
-      "description": "Teste simples"
+      "name": "Teste WhatsApp",
+      "description": "Disparo via webhook"
     }
   },
   "arguments": {
@@ -17,7 +17,33 @@
       "verb": "POST",
       "body": "",
       "header": "",
-      "useJwt": false
+      "useJwt": false,
+      "timeout": 10000
+    }
+  },
+  "configurationArguments": {
+    "save": {
+      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "verb": "POST"
+    },
+    "publish": {
+      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "verb": "POST"
+    },
+    "validate": {
+      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "verb": "POST"
+    },
+    "stop": {
+      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "verb": "POST"
+    }
+  },
+  "userInterfaces": {
+    "configModal": {
+      "url": "https://example.com",
+      "height": 600,
+      "width": 800
     }
   }
 }
