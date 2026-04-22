@@ -17,8 +17,8 @@
       "verb": "POST",
        "inArguments": [
           {
-            "phone": "{{Contact.Default.Phone}}",
-            "nome": "{{Contact.Default.FirstName}}",
+            "phone": "{{celular}}",
+            "nome": "{{nome}}",
             "mensagem": "{{mensagem}}"
           }
       ]
