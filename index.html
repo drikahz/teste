@@ -40,6 +40,11 @@
     enabled: true
   });
 
+  // 🔹 quando clicar em concluído
+  connection.on('clickedNext', function() {
+    salvar();
+  });
+
   // 🔹 Salvar configuração
   function salvar() {
     const mensagem = document.getElementById("mensagem").value;
