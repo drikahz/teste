@@ -13,7 +13,7 @@
   },
   "arguments": {
     "execute": {
-      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
       "verb": "POST",
        "inArguments": [
           {
@@ -25,15 +25,15 @@
   },
   "configurationArguments": {
   "save": {
-    "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+    "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
     "verb": "POST"
   },
   "publish": {
-    "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+    "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
     "verb": "POST"
   },
   "validate": {
-    "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+    "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
     "verb": "POST"
   }
 },
