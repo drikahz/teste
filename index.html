@@ -1,19 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Config</title>
-</head>
 <body>
-  <h2>Configurar envio WhatsApp</h2>
 
-  <label>Telefone:</label>
-  <input id="phone" placeholder="%%phone%%" />
+<h3>Mensagem do WhatsApp</h3>
 
-  <script>
-    // simula integração com Journey Builder
-    window.addEventListener("message", function (event) {
-      console.log("Mensagem recebida:", event.data);
-    });
-  </script>
+<textarea id="mensagem" placeholder="Digite a mensagem"></textarea>
+
+<button onclick="salvar()">Salvar</button>
+
+<script>
+  let mensagem = "";
+
+  // avisa que carregou (remove loading)
+  window.parent.postMessage(
+    JSON.stringify({ method: "ready" }),
+    "*"
+  );
+
+  function salvar() {
+    mensagem = document.getElementById("mensagem").value;
+
+    window.parent.postMessage(
+      JSON.stringify({
+        method: "updateActivity",
+        activity: {
+          arguments: {
+            execute: {
+              inArguments: [
+                {
+                  mensagem: mensagem
+                }
+              ]
+            }
+          }
+        }
+      }),
+      "*"
+    );
+  }
+</script>
+
 </body>
 </html>
