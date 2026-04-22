@@ -15,11 +15,13 @@
     "execute": {
       "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
       "verb": "POST",
-      "body": {
-        "phone": "{{Contact.Default.Phone}}",
-        "nome": "{{Contact.Default.FirstName}}",
-        "mensagem": "{{Activity.mensagem}}"
-      }
+       "inArguments": [
+          {
+            "phone": "{{Contact.Default.Phone}}",
+            "nome": "{{Contact.Default.FirstName}}",
+            "mensagem": "{{mensagem}}"
+          }
+      ]
     }
   },
   "configurationArguments": {
