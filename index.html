@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <script src="https://unpkg.com/postmonger"></script>
+</head>
 <body>
 
 <h3>Mensagem do WhatsApp</h3>
-
-<textarea id="mensagem" placeholder="Digite a mensagem"></textarea>
+<textarea id="mensagem"></textarea>
 
 <button onclick="salvar()">Salvar</button>
 
 <script>
-  let mensagem = "";
+  const connection = new Postmonger.Session();
 
-  // avisa que carregou (remove loading)
-  window.parent.postMessage(
-    JSON.stringify({ method: "ready" }),
-    "*"
-  );
+  // quando conectar
+  connection.on('initActivity', function(data) {
+    console.log('Activity carregada', data);
+  });
+
+  connection.on('requestedTokens', function(tokens) {
+    console.log('Tokens', tokens);
+  });
+
+  connection.on('requestedEndpoints', function(endpoints) {
+    console.log('Endpoints', endpoints);
+  });
+
+  // inicia handshake correto
+  connection.trigger('ready');
+  connection.trigger('requestTokens');
+  connection.trigger('requestEndpoints');
 
   function salvar() {
-    mensagem = document.getElementById("mensagem").value;
+    const mensagem = document.getElementById("mensagem").value;
 
-    window.parent.postMessage(
-      JSON.stringify({
-        method: "updateActivity",
-        activity: {
-          arguments: {
-            execute: {
-              inArguments: [
-                {
-                  mensagem: mensagem
-                }
-              ]
-            }
-          }
+    connection.trigger('updateActivity', {
+      arguments: {
+        execute: {
+          inArguments: [
+            { mensagem }
+          ]
         }
-      }),
-      "*"
-    );
+      }
+    });
   }
 </script>
 
