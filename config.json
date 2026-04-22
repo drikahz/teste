@@ -18,7 +18,7 @@
        "inArguments": [
           {
             
-            "mensagem": "{{Activity.mensagem}}"
+            "mensagem": "{{mensagem}}"
           }
       ]
     }
