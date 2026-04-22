@@ -7,41 +7,38 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Teste WhatsApp",
-      "description": "Disparo via webhook"
+      "name": "Enviar WhatsApp",
+      "description": "Disparo com mensagem customizada"
     }
   },
   "arguments": {
     "execute": {
-      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "url": "https://seu-backend.com/execute",
       "verb": "POST",
-      "body": "",
-      "header": "",
-      "useJwt": false,
-      "timeout": 10000
+      "body": {
+        "phone": "{{Contact.Default.Phone}}",
+        "nome": "{{Contact.Default.FirstName}}",
+        "mensagem": "{{Activity.mensagem}}"
+      }
     }
   },
   "configurationArguments": {
     "save": {
-      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "url": "https://webhook.site/seu-id",
       "verb": "POST"
     },
     "publish": {
-      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "url": "https://webhook.site/seu-id",
       "verb": "POST"
     },
     "validate": {
-      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
-      "verb": "POST"
-    },
-    "stop": {
-      "url": "https://webhook.site/0fae02d8-778e-46cc-aeba-32edcd402c60",
+      "url": "https://webhook.site/seu-id",
       "verb": "POST"
     }
   },
   "userInterfaces": {
     "configModal": {
-      "url": "https://drikahz.github.io/teste",
+      "url": "https://drikahz.github.io/teste/",
       "height": 600,
       "width": 800
     }
