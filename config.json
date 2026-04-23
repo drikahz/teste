@@ -18,7 +18,8 @@
       "verb": "POST",
        "inArguments": [
           {
-             "mensagem": ""
+             "mensagem": "",
+            "nome": "{{Contact.Default.FirstName}}"
           }
       ]
     }
