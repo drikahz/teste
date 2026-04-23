@@ -18,7 +18,7 @@
       "verb": "POST",
        "inArguments": [
           {
-              "mensagem": "{{Activity.mensagem}}"
+              "mensagem": "{{mensagem}}"
             
           }
       ]
