@@ -17,13 +17,27 @@
       "verb": "POST",
        "inArguments": [
           {
-             "mensagem": "{{mensagem}}"
-            
+            "phone": "{{Contact.Default.Phone}}",
+            "nome": "{{Contact.Default.FirstName}}",
+            "mensagem": "{{mensagem}}"
           }
       ]
     }
   },
-  
+  "configurationArguments": {
+    "save": {
+      "url": "https://webhook.site/seu-id",
+      "verb": "POST"
+    },
+    "publish": {
+      "url": "https://webhook.site/seu-id",
+      "verb": "POST"
+    },
+    "validate": {
+      "url": "https://webhook.site/seu-id",
+      "verb": "POST"
+    }
+  },
   "userInterfaces": {
     "configModal": {
       "url": "https://drikahz.github.io/teste/",
