@@ -1,4 +1,4 @@
-define(['https://unpkg.com/postmonger'], function(Postmonger) {
+define(['postmonger'], function(Postmonger) {
 
   const connection = new Postmonger.Session();
   let activity = {};
