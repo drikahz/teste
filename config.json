@@ -2,40 +2,23 @@
   "workflowApiVersion": "1.1",
   "type": "REST",
   "metaData": {
-    "icon": "https://cdn-icons-png.flaticon.com/512/733/733585.png",
-    "category": "message"
+    "icon": "https://cdn-icons-png.flaticon.com/512/733/733585.png"
   },
   "lang": {
     "pt-BR": {
       "name": "Enviar WhatsApp",
-      "description": "Disparo com mensagem customizada"
+      "description": "Teste"
     }
   },
   "arguments": {
     "execute": {
       "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
       "verb": "POST",
-       "inArguments": [
-          {
-            "phone": "{{Contact.Default.Phone}}",
-            "nome": "{{Contact.Default.FirstName}}",
-            "mensagem": "{{mensagem}}"
-          }
+      "inArguments": [
+        {
+          "mensagem": "{{mensagem}}"
+        }
       ]
-    }
-  },
-  "configurationArguments": {
-    "save": {
-      "url": "https://webhook.site/seu-id",
-      "verb": "POST"
-    },
-    "publish": {
-      "url": "https://webhook.site/seu-id",
-      "verb": "POST"
-    },
-    "validate": {
-      "url": "https://webhook.site/seu-id",
-      "verb": "POST"
     }
   },
   "userInterfaces": {
