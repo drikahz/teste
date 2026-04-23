@@ -18,7 +18,9 @@
       "verb": "POST",
        "inArguments": [
           {
-             "mensagem": "{{mensagem}}"
+             "mensagem": "",
+            "email": "{{Event.999F808D-3509-4147-8A04-21CAD20E62F8.email}}",
+            
             
           }
       ]
