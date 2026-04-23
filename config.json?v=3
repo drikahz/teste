@@ -8,7 +8,7 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar WhatsApp 2",
+      "name": "Enviar WhatsApp",
       "description": "Disparo com mensagem customizada"
     }
   },
@@ -21,6 +21,20 @@
              "mensagem": ""
           }
       ]
+    }
+  },
+  "configurationArguments": {
+    "save": {
+      "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
+      "verb": "POST"
+    },
+    "publish": {
+      "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
+      "verb": "POST"
+    },
+    "validate": {
+      "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
+      "verb": "POST"
     }
   },
 
