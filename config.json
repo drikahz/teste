@@ -7,7 +7,7 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar W",
+      "name": "Enviar Whaa",
       "description": "Disparo com mensagem customizada"
     }
   },
@@ -40,7 +40,7 @@
 
   "userInterfaces": {
     "configModal": {
-      "url": "index.html",
+      "url": "https://drikahz.github.io/teste/index.html"
       "height": 600,
       "width": 800
     }
