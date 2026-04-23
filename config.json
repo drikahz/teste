@@ -40,7 +40,7 @@
 
   "userInterfaces": {
     "configModal": {
-      "url": "https://drikahz.github.io/teste/index.html"
+      "url": "https://drikahz.github.io/teste/index.html",
       "height": 600,
       "width": 800
     }
