@@ -11,79 +11,68 @@
 <button onclick="salvar()">Salvar</button> -->
 
 <script>
-const connection = new Postmonger.Session();
-let activity = {};
-let eventKey = null;
+  const connection = new Postmonger.Session();
+  let activity = {};
 
-// 🔹 pega schema da jornada
-connection.on('requestedSchema', function(data) {
-  console.log("SCHEMA:", data);
+  // 🔹 Carrega dados ao abrir a activity
+  connection.on('initActivity', function(data) {
+    activity = data;
 
-  // 🔥 pega o nome dinâmico do event
-  eventKey = data?.schema?.eventDefinitionKey;
+    const inArgs = activity?.arguments?.execute?.inArguments || [];
+    const mensagem = inArgs[0]?.mensagem || "";
 
-  console.log("Event Key:", eventKey);
-});
+    document.getElementById("mensagem").value = mensagem;
+  });
 
-// 🔹 init
-connection.on('initActivity', function(data) {
-  activity = data;
+  // 🔹 Handshake necessário
+  connection.on('requestedTokens', function(tokens) {});
+  connection.on('requestedEndpoints', function(endpoints) {});
 
-  const inArgs = activity?.arguments?.execute?.inArguments || [];
-  const mensagem = inArgs[0]?.mensagem || "";
+  connection.trigger('ready');
+  connection.trigger('requestTokens');
+  connection.trigger('requestEndpoints');
 
-  document.getElementById("mensagem").value = mensagem;
-});
+  // 🔹 Habilita botão "Concluído"
+  connection.trigger('updateButton', {
+    button: 'next',
+    text: 'Concluído',
+    visible: true,
+    enabled: true
+  });
 
-// 🔹 handshake
-connection.on('requestedTokens', function() {});
-connection.on('requestedEndpoints', function() {});
+  // 🔹 quando clicar em concluído
+  connection.on('clickedNext', function() {
+    salvar();
+  });
 
-connection.trigger('ready');
-connection.trigger('requestTokens');
-connection.trigger('requestEndpoints');
-connection.trigger('requestSchema'); // 🔥 IMPORTANTE
-
-// botão concluir
-connection.trigger('updateButton', {
-  button: 'next',
-  text: 'Concluído',
-  visible: true,
-  enabled: true
-});
-
-// clique concluir
-connection.on('clickedNext', function() {
-  salvar();
-});
-
-// 🔹 salvar
-function salvar() {
+  // 🔹 Salvar configuração
+ function salvar() {
   const mensagem = document.getElementById("mensagem").value;
 
+  // Garante a estrutura do objeto
   activity.arguments = activity.arguments || {};
   activity.arguments.execute = activity.arguments.execute || {};
 
-  // 🔥 monta dinamicamente o path
-  const emailPath = eventKey ? `{{Event.${eventKey}.email}}` : "";
-  const celularPath = eventKey ? `{{Event.${eventKey}.celular}}` : "";
-
+  // Define os argumentos que o Webhook vai receber
   activity.arguments.execute.inArguments = [
     {
-      mensagem: mensagem,
-      email: emailPath,
-      celular: celularPath
+      "mensagem": mensagem,
+      "celular": "{{Event.DEAudience-1.celular}}",
+      "email": "{{Event.DEAudience-1.email}}"
+      
     }
   ];
 
   activity.metaData = activity.metaData || {};
   activity.metaData.isConfigured = true;
 
-  console.log("FINAL:", activity);
-
+  // Envia os dados atualizados
   connection.trigger('updateActivity', activity);
-  connection.trigger('nextStep');
+  
+  // 🔹 ADICIONE ESTA LINHA: Avisa ao JB que pode avançar/fechar o modal
+  connection.trigger('nextStep'); 
 }
+
 </script>
 
 </body>
