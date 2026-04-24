@@ -1,13 +1,14 @@
 {
   "workflowApiVersion": "1.1",
   "type": "REST",
+  "key": "REST-FINAL-2",
   "metaData": {
     "icon": "https://cdn-icons-png.flaticon.com/512/733/733585.png",
     "category": "message"
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar Whats",
+      "name": "Enviar Whts",
       "description": "Disparo com mensagem customizada"
     }
   },
