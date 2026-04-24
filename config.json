@@ -7,7 +7,7 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar Whats2",
+      "name": "Enviar Wh",
       "description": "Disparo com mensagem customizada"
     }
   },
@@ -16,8 +16,12 @@
       "url": "https://webhook.site/6ba3a9d4-b015-4672-97ed-8a7e7317a894",
       "verb": "POST",
       "header": "Content-Type: application/json",
-      "body": "{\"mensagem\":\"{{Activity.mensagem}}\",\"telefone\":\"{{Contact.Attribute.999F808D-3509-4147-8A04-21CAD20E62F8.celular}}\",\"nome\":\"{{Contact.Attribute.999F808D-3509-4147-8A04-21CAD20E62F8.nome}}\"}"
-    
+      "inArguments": [
+          {
+       
+            "mensagem": "{{mensagem}}"
+          }
+      ]
     }
   },
   "configurationArguments": {
