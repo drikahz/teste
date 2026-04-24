@@ -7,7 +7,7 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar m",
+      "name": "Enviar Whats",
       "description": "Disparo com mensagem customizada"
     }
   },
@@ -26,7 +26,8 @@
         "inArguments": [
           {
             "mensagem": { "dataType": "Text", "direction": "in", "access": "visible" },
-            "teste": { "dataType": "Text", "direction": "in", "access": "visible" }
+            "email": { "dataType": "EmailAddress", "direction": "in", "access": "visible" },
+            "celular": { "dataType": "Phone", "direction": "in", "access": "visible" }
           }
         ],
         "outArguments": []
