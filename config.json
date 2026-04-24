@@ -7,7 +7,7 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar",
+      "name": "Enviar m",
       "description": "Disparo com mensagem customizada"
     }
   },
@@ -15,14 +15,25 @@
     "execute": {
       "url": "https://webhook.site/d69beacb-3fc9-4ea0-8050-d7774aacdc98",
       "verb": "POST",
-       "inArguments": [
-          {
-              "teste": "testemdpk"
-          }
-      ]
-      
+      "inArguments": [], 
+      "outArguments": [],
+      "useJwt": false
     }
   },
+  "schema": {
+    "arguments": {
+      "execute": {
+        "inArguments": [
+          {
+            "mensagem": { "dataType": "Text", "direction": "in", "access": "visible" },
+            "teste": { "dataType": "Text", "direction": "in", "access": "visible" }
+          }
+        ],
+        "outArguments": []
+      }
+    }
+  }
+
   "configurationArguments": {
     "save": {
       "url": "https://webhook.site/d69beacb-3fc9-4ea0-8050-d7774aacdc98",
