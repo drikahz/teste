@@ -8,7 +8,7 @@
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar Whats2",
+      "name": "Enviar Whats32",
       "description": "Disparo com mensagem customizada"
     }
   },
@@ -16,26 +16,26 @@
     "execute": {
       "url": "https://webhook.site/d69beacb-3fc9-4ea0-8050-d7774aacdc98",
       "verb": "POST",
-      "inArguments": [], 
+      "inArguments": [],
       "outArguments": [],
       "useJwt": false
     }
   },
-  {
+
   "schema": {
     "arguments": {
       "execute": {
         "inArguments": [
           {
+            "mensagem": { "dataType": "Text" },
             "email": { "dataType": "Text" },
             "celular": { "dataType": "Text" }
           }
-        ]
+        ],
+        "outArguments": []
       }
     }
   },
-  "eventDefinitionKey": "DEAudience-1"
-},
 
   "configurationArguments": {
     "save": {
