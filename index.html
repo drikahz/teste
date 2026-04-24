@@ -49,22 +49,28 @@
  function salvar() {
   const mensagem = document.getElementById("mensagem").value;
 
+  // Garante a estrutura do objeto
   activity.arguments = activity.arguments || {};
   activity.arguments.execute = activity.arguments.execute || {};
 
+  // Define os argumentos que o Webhook vai receber
   activity.arguments.execute.inArguments = [
     {
-      mensagem: mensagem
-
+      "mensagem": mensagem,
+      "teste": "testemdpk" // Adicione o fixo aqui também para garantir
     }
   ];
 
-  // 🔥 ESSA LINHA RESOLVE O ERRO
   activity.metaData = activity.metaData || {};
   activity.metaData.isConfigured = true;
-console.log(JSON.stringify(activity, null, 2));
+
+  // Envia os dados atualizados
   connection.trigger('updateActivity', activity);
+  
+  // 🔹 ADICIONE ESTA LINHA: Avisa ao JB que pode avançar/fechar o modal
+  connection.trigger('nextStep'); 
 }
+
 </script>
 
 </body>
