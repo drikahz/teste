@@ -8,32 +8,31 @@
 
 <h3>Mensagem do WhatsApp</h3>
 <textarea id="mensagem" style="width: 100%; height: 100px;"></textarea>
-  <input id="emailPath" placeholder="Ex: Event.DEAudience-1.email">
-<input id="celularPath" placeholder="Ex: Event.DEAudience-1.celular">
+<input id="emailPath" value="Event.DEAudience-1.email">
+<input id="celularPath" value="Event.DEAudience-1.celular">
 
 <script>
   const connection = new Postmonger.Session();
   let activity = {};
-  let eventKey = null;
-
-  // 🔥 pega o schema da jornada (onde vem o nome dinâmico)
-  connection.on('requestedSchema', function(data) {
-    console.log("SCHEMA:", data);
-
-    // pega o nome do event (ex: DEAudience-1)
-    eventKey = data?.eventDefinitionKey || data?.metaData?.eventDefinitionKey;
-
-    console.log("EventKey detectado:", eventKey);
-  });
-
+  
   // 🔹 init activity
   connection.on('initActivity', function(data) {
     activity = data;
 
     const inArgs = activity?.arguments?.execute?.inArguments || [];
-    const mensagem = inArgs[0]?.mensagem || "";
-
-    document.getElementById("mensagem").value = mensagem;
+        
+    const data = inArgs[0] || {};
+    
+    document.getElementById("mensagem").value = data.mensagem || "";
+    
+    // remove {{ }}
+    if (data.email) {
+      document.getElementById("emailPath").value = data.email.replace(/[{}]/g, "");
+    }
+    
+    if (data.celular) {
+      document.getElementById("celularPath").value = data.celular.replace(/[{}]/g, "");
+    }
   });
 
   // 🔹 handshake obrigatório
@@ -63,27 +62,24 @@
     const mensagem = document.getElementById("mensagem").value;
     const emailPath = document.getElementById("emailPath").value;
     const celularPath = document.getElementById("celularPath").value;
-
+  
+    const email = emailPath ? `{{${emailPath}}}` : "";
+    const celular = celularPath ? `{{${celularPath}}}` : "";
+  
     activity.arguments = activity.arguments || {};
     activity.arguments.execute = activity.arguments.execute || {};
-
-    // 🔥 monta paths dinâmicos
-    const email = eventKey ? `{{Event.${eventKey}.email}}` : "";
-    const celular = eventKey ? `{{Event.${eventKey}.celular}}` : "";
-
+  
     activity.arguments.execute.inArguments = [
       {
         mensagem: mensagem,
-        email: `{{${emailPath}}}`,
-        celular: `{{${celularPath}}}`
+        email: email,
+        celular: celular
       }
     ];
-
+  
     activity.metaData = activity.metaData || {};
     activity.metaData.isConfigured = true;
-
-    console.log("PAYLOAD FINAL:", activity);
-
+  
     connection.trigger('updateActivity', activity);
     connection.trigger('nextStep');
   }
