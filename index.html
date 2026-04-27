@@ -7,81 +7,96 @@
 <body>
 
 <h3>Mensagem do WhatsApp</h3>
-<textarea id="mensagem" style="width: 100%; height: 100px;"></textarea>
-<input id="emailPath" value="Event.DEAudience-1.email">
-<input id="celularPath" value="Event.DEAudience-1.celular">
+
+<textarea id="mensagem" style="width:100%; height:100px;"></textarea>
+<br><br>
+
+<input id="emailPath" placeholder="Ex: Event.DEAudience-1.email">
+<br><br>
+<input id="celularPath" placeholder="Ex: Event.DEAudience-1.celular">
 
 <script>
   const connection = new Postmonger.Session();
   let activity = {};
-  
-  // 🔹 init activity
-  connection.on('initActivity', function(data) {
-    activity = data;
 
-    const inArgs = activity?.arguments?.execute?.inArguments || [];
-        
-    const data = inArgs[0] || {};
-    
-    document.getElementById("mensagem").value = data.mensagem || "";
-    
-    // remove {{ }}
-    if (data.email) {
-      document.getElementById("emailPath").value = data.email.replace(/[{}]/g, "");
-    }
-    
-    if (data.celular) {
-      document.getElementById("celularPath").value = data.celular.replace(/[{}]/g, "");
+  // 🔹 INIT (carrega dados)
+  connection.on('initActivity', function(data) {
+    try {
+      activity = data || {};
+
+      const inArgs = activity?.arguments?.execute?.inArguments || [];
+      const args = inArgs[0] || {};
+
+      document.getElementById("mensagem").value = args.mensagem || "";
+
+      if (args.email) {
+        document.getElementById("emailPath").value = args.email.replace(/[{}]/g, "");
+      }
+
+      if (args.celular) {
+        document.getElementById("celularPath").value = args.celular.replace(/[{}]/g, "");
+      }
+
+      // ✅ botão só aqui (CRÍTICO)
+      connection.trigger('updateButton', {
+        button: 'next',
+        text: 'Concluído',
+        visible: true,
+        enabled: true
+      });
+
+    } catch (e) {
+      console.error("Erro no initActivity:", e);
     }
   });
 
-  // 🔹 handshake obrigatório
+  // 🔹 HANDSHAKE (obrigatório)
   connection.on('requestedTokens', function() {});
   connection.on('requestedEndpoints', function() {});
 
   connection.trigger('ready');
   connection.trigger('requestTokens');
   connection.trigger('requestEndpoints');
-  connection.trigger('requestSchema'); // 🔥 ESSENCIAL
 
-  // 🔹 botão concluir
-  connection.trigger('updateButton', {
-    button: 'next',
-    text: 'Concluído',
-    visible: true,
-    enabled: true
-  });
-
-  // 🔹 ao clicar em concluir
+  // 🔹 CLICK NO CONCLUÍDO
   connection.on('clickedNext', function() {
     salvar();
   });
 
-  // 🔹 salvar configuração
+  // 🔹 SALVAR CONFIG
   function salvar() {
-    const mensagem = document.getElementById("mensagem").value;
-    const emailPath = document.getElementById("emailPath").value;
-    const celularPath = document.getElementById("celularPath").value;
-  
-    const email = emailPath ? `{{${emailPath}}}` : "";
-    const celular = celularPath ? `{{${celularPath}}}` : "";
-  
-    activity.arguments = activity.arguments || {};
-    activity.arguments.execute = activity.arguments.execute || {};
-  
-    activity.arguments.execute.inArguments = [
-      {
-        mensagem: mensagem,
-        email: email,
-        celular: celular
-      }
-    ];
-  
-    activity.metaData = activity.metaData || {};
-    activity.metaData.isConfigured = true;
-  
-    connection.trigger('updateActivity', activity);
-    connection.trigger('nextStep');
+    try {
+      const mensagem = document.getElementById("mensagem").value;
+      const emailPath = document.getElementById("emailPath").value;
+      const celularPath = document.getElementById("celularPath").value;
+
+      const email = emailPath ? `{{${emailPath}}}` : "";
+      const celular = celularPath ? `{{${celularPath}}}` : "";
+
+      activity.arguments = activity.arguments || {};
+      activity.arguments.execute = activity.arguments.execute || {};
+
+      activity.arguments.execute.inArguments = [
+        {
+          mensagem: mensagem,
+          email: email,
+          celular: celular
+        }
+      ];
+
+      activity.metaData = activity.metaData || {};
+      activity.metaData.isConfigured = true;
+
+      console.log("SALVANDO:", activity);
+
+      connection.trigger('updateActivity', activity);
+
+      // ✅ ESSENCIAL pra fechar modal
+      connection.trigger('nextStep');
+
+    } catch (e) {
+      console.error("Erro ao salvar:", e);
+    }
   }
 </script>
 
