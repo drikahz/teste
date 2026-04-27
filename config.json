@@ -1,34 +1,36 @@
 {
   "workflowApiVersion": "1.1",
   "type": "REST",
-  "key": "REST-FINAL-2",
+  "key": "REST-FINAL-INPUT",
   "metaData": {
     "icon": "https://cdn-icons-png.flaticon.com/512/733/733585.png",
     "category": "message"
   },
   "lang": {
     "pt-BR": {
-      "name": "Enviar W",
+      "name": "Enviar WhatsApp",
       "description": "Disparo com mensagem customizada"
     }
   },
+
   "arguments": {
     "execute": {
-      "url": "https://webhook.site/f659ebf1-35f4-4fcf-9306-9458eb768746",
+      "url": "https://webhook.site/d69beacb-3fc9-4ea0-8050-d7774aacdc98",
       "verb": "POST",
-      "inArguments": [], 
+      "inArguments": [],
       "outArguments": [],
       "useJwt": false
     }
   },
+
   "schema": {
     "arguments": {
       "execute": {
         "inArguments": [
           {
-            "mensagem": { "dataType": "Text", "direction": "in", "access": "visible" },
-            "email": { "dataType": "EmailAddress", "direction": "in", "access": "visible" },
-            "celular": { "dataType": "Phone", "direction": "in", "access": "visible" }
+            "mensagem": { "dataType": "Text" },
+            "email": { "dataType": "Text" },
+            "celular": { "dataType": "Text" }
           }
         ],
         "outArguments": []
@@ -38,15 +40,15 @@
 
   "configurationArguments": {
     "save": {
-      "url": "https://webhook.site/f659ebf1-35f4-4fcf-9306-9458eb768746",
+      "url": "https://webhook.site/d69beacb-3fc9-4ea0-8050-d7774aacdc98",
       "verb": "POST"
     },
     "publish": {
-      "url": "https://webhook.site/f659ebf1-35f4-4fcf-9306-9458eb768746",
+      "url": "https://webhook.site/d69beacb-3fc9-4ea0-8050-d7774aacdc98",
       "verb": "POST"
     },
     "validate": {
-      "url": "https://webhook.site/f659ebf1-35f4-4fcf-9306-9458eb768746",
+      "url": "https://webhook.site/d69beacb-3fc9-4ea0-8050-d7774aacdc98",
       "verb": "POST"
     }
   },
